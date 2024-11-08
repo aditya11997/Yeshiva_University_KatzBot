@@ -1,0 +1,161 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 80%;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 20px;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .chat-text span {
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  .chat-text span strong {
+    display: block;
+  }
+
+  .chat-text span a {
+    text-decoration: underline;
+    color: inherit;
+    font-weight: bold;
+    color: #005792;
+  }
+
+  .chat-text span a:hover {
+    text-decoration: underline;
+    color: #555; /* A subtle color change on hover */
+  }
+
+  /* To ensure scrolling is smooth */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+  
+  .chat-row {
+    display: flex;
+    margin: 5px 0;
+  }
+  
+  .chat-row.human {
+    justify-content: flex-end;
+  }
+  
+  .chat-row.bot {
+    justify-content: flex-start;
+  }
+
+  .chat-bubble {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .chat-bubble.bot {
+    background-color: #586e75;
+    color: white;
+    float: left;
+    border-radius: 15px 15px 15px 0;
+  }
+  
+  .chat-bubble.user {
+    background-color: #007bff;
+    color: white;
+    float: right;
+    border-radius: 15px 15px 0 15px;
+  }
+  
+  .chat-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .chat-text {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .spinner {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .inputForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+  .inputForm input {
+    padding-left: 10px !important;
+    font-size: 16px;
+    border-radius: 24px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .mic-button, .send-button {
+    background-color: #f4f4f4;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    max-width: fit-content;
+  }
+  
+  .mic-button:hover, .send-button:hover {
+    background-color: #ddd;
+  }
+  /* Position the spinner in the center of the message area */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+.mic-button {
+  background: none;
+  border: none;
+}
+
+.mic-button.recording {
+  color: red !important;  /* Change the color when recording */
+  font-size: 33px;  /* Make it bigger during recording */
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
+  margin-top: 5px;
+}

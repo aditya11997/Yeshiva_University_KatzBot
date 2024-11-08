@@ -1,0 +1,474 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  h3 {
+    text-align: center; 
+    color: white;  
+    padding: 10px 0;  
+  }
+  .sidebar.visible {
+    background-color: #325a89;
+    display: block;
+  }
+  #history {
+    height: 80%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: none;
+  }
+  
+  #newChat {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #add8e6;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #newChat:hover {
+    background-color: #7fb2e5;
+  }
+  .chatLabel {
+    cursor: pointer;
+    background-color: #d2eaf2;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+  }
+  
+  .chatLabel:hover {
+    background-color: #e7e7e7;
+  }
+  .delete-icon {
+    background: none; 
+    border: none;     
+    cursor: pointer;  
+    margin-left: auto; 
+    float: right;
+  }
+  .edit-icon {
+    background: none; 
+    border: none;     
+    cursor: pointer;  
+    margin-left: auto; 
+    float: right;
+  }
+  .edit-input {
+    border: none;
+    background-color: inherit;
+    width: 80%;
+    padding: 2px 5px;
+  }
+  
+  .edit-input:focus {
+    outline: none;
+    border: 1px solid #007BFF;
+  }
+  .chat {
+    flex: 5;
+    display: flex;
+    flex-direction:column;
+    height: 100%;
+    border: 1px solid #ddd;
+    background: linear-gradient(to right, #f0f9fc, #add8e6);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding-bottom: 60px; 
+    box-sizing: border-box;
+  }
+  
+  #chatbox {
+    flex: 1;
+    overflow: auto;
+    padding: 20px 10px;
+    height: calc(100% - 60px); 
+    box-sizing: border-box;
+  }
+  #inputWrapper {
+    position: absolute;
+    bottom: 0; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 33.33%;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 24px;  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+  }
+  #input {
+    flex-grow: 1;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 10px 10px 20px;
+    font-size: 16px;
+    outline: none;
+  }
+  .mic-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 50%;  
+    margin-left: 5px;  
+    transition: background-color 0.3s;
+  }
+  
+  .mic-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    text-align: center;
+  }
+  .usermessage, .botmessage {
+    max-width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .usermessage::before {
+    content: "";
+  /*    background: url('/static/image/user.jpg') no-repeat center center;*/
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .bot-note {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #000000;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  .botmessage::before {
+    content: "";
+  /*    background: url('/static/image/bot.jpg') no-repeat center center;*/
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .botmessage pre {
+    display: block;
+    font-family: "Courier New", monospace;
+    white-space: pre;
+    margin: 1em auto;  
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 92%;  
+    background-color: #f4f4f4;
+  }
+  
+  .usermessage {
+    background-color: #b2ffb2;
+    float: right;
+    clear: both;
+  }
+  
+  .botmessage {
+    white-space: pre-line;
+    background-color: rgb(251 249 251);
+    float: left;
+    clear: both;
+  }
+  
+  /* Ensure your .chat-container has a fixed maximum height and is scrollable */
+  .fixed-input-container {
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    width: 100% !important;
+  }
+  
+  /* Group mic and text input together */
+  .fixed-input-container > .stButton, 
+  .fixed-input-container > .stTextInput {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Space between mic and input */
+  }
+  
+  /* Chat container to occupy its own space below input controls */
+  .chat-container {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px; /* Space between input and chat */
+    align-items: center !important;
+  }
+  
+  /* You might need to adjust other styles to ensure they work well with these */
+  .chat-row {
+    display: flex !important;
+    margin: 5px;
+    width: 100%;
+  }
+  
+  .row-reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .chat-bubble {
+    font-family: "Source Sans Pro", sans-serif, "Segoe UI", "Roboto", sans-serif;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    margin: 0px 7px;
+    max-width: 70%;
+  }
+  
+  .ai-bubble {
+    /* background: rgb(124, 175, 177); */
+    background: linear-gradient(135deg, rgb(116, 123, 126) 0%, rgb(116, 123, 126) 100%); 
+    color: white;
+    border-radius: 10px;
+  }
+  
+  .human-bubble {
+    background: linear-gradient(135deg, rgb(0, 178, 255) 0%, rgb(0, 106, 255) 100%); 
+    color: white;
+    border-radius: 20px;
+  }
+  
+  .chat-icon {
+    border-radius: 5px;
+  }
+  
+  /* Add to your style.css file */
+  .voice-icon {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .voice-icon:hover {
+    color: #007bff;
+  }
+.App{
+    display: flex;
+}
+html, body, #root, .App {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.app-content{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.inputForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.inputForm form{
+    display: flex;
+    gap: 1rem;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+}
+.inputForm form input {
+    width: calc(71.4286% - 1rem);
+    flex: 1 1 calc(71.4286% - 1rem);
+    background-color: rgb(240, 242, 246);
+    border-color: rgb(240, 242, 246);
+    height: 2.5rem;
+    transition-property: border;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    width: 100%;
+    line-height: 1.6;
+    padding-left: 0px;
+    padding-right: 0px;
+    border: 1px solid rgba(49, 51, 63, 0.2)
+}
+.inputForm form .mic-button {
+    color: black;
+    width: calc(14.2857% - 1rem);
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: calc(14.2857% - 1rem);
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    background-color: rgb(255, 255, 255);
+    -webkit-user-select: none;
+    user-select: none;
+    color: inherit;
+    margin: 0px !important;
+    min-height: 2.5rem;
+    border-radius: 0.5rem;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    padding-top: 5px !important;
+    padding-bottom: 0px !important;
+    font-weight: 400;
+    display: inline-flex;
+    font-size: 28px;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    font-family: "Source Sans Pro", sans-serif;
+}
+.inputForm form .send-button {
+  width: calc(14.2857% - 1rem);
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: calc(14.2857% - 1rem);
+  border: 1px solid rgba(49, 51, 63, 0.2);
+  background-color: rgb(255, 255, 255);
+  -webkit-user-select: none;
+  user-select: none;
+  color: inherit;
+  margin: 0px !important;
+  min-height: 2.5rem;
+  border-radius: 0.5rem;
+  padding: 0px !important; 
+  font-weight: 400;
+  display: inline-flex;
+  font-size: 28px;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.chat-interface {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .chat-container {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .chat-input-form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .chat-submit-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .chat-submit-button:hover {
+    background-color: #0056b3;
+  }
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px !important;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .collapse-icon {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+  }
+  .app-content {
+    margin-left: 0;
+  }
+}
+@media (max-width: 768px) {
+  .chat-container {
+      width: 100% !important; /* Make the chat container take the full width */
+      margin: 0;
+      padding: 10px;
+      max-width: 90% !important;
+  }
+  .chat-messages{
+    overflow-x: hidden;
+  }
+}
+.chat-container {
+  background-color: #fff;
+}
+
+body {
+  background-color: #fff;
+}
+.dark-theme .chat-container {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-theme body {
+  background-color: #333;
+  color: #fff;
+}

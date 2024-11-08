@@ -1,0 +1,30 @@
+.chat-message {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+}
+
+.chat-message.human {
+    justify-content: flex-end;
+}
+
+.chat-message.bot {
+    justify-content: flex-start;
+}
+
+.chat-bubble {
+    background-color: #f1f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.chat-message.user .chat-bubble {
+    background-color: #007bff;
+    color: white;
+}
+
+.chat-message.bot .chat-bubble {
+    background-color: #e5e5ea;
+}
+  

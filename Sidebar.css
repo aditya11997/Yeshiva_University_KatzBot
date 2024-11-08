@@ -1,0 +1,146 @@
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    background-color: #f7f7f7;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000; /* Ensure the sidebar appears on top of other content */
+    transform: translateX(0); /* Default to visible */
+  }
+/* When sidebar is fully open */
+.sidebar.open {
+    min-width: 244px;
+    width: 336px;
+}
+
+/* When sidebar is collapsed */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+.sidebar.collapsed .collapse-icon {
+    opacity: 1;
+}
+
+/* Sidebar header with toggle icon */
+.sidebar-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(240, 242, 246);
+    position: relative;
+    padding: 1.25rem 1.5rem 1.5rem;
+    box-sizing: border-box;
+}
+
+/* Title in the sidebar */
+.sidebar-header h3 {
+    font-size: 16px;
+    color: #333;
+    margin-left: 10px;
+}
+
+/* The collapse/expand toggle button (right-aligned) */
+.collapse-icon {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1100; /* Ensure the icon appears above everything */
+    cursor: pointer;
+    font-size: 24px;
+}
+
+/* Icon button hover effect */
+.collapse-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Content inside the sidebar (like language selector) */
+.sidebar-content {
+    padding: 1rem;
+}
+
+/* Select dropdown for language options */
+.language-select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 90%;
+}
+
+/* Focus state for dropdown */
+.language-select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Sidebar hover effect for arrow visibility */
+.sidebar:hover .collapse-icon {
+    display: block;
+}
+.label{
+    font-size: 14px;
+    color: rgb(49, 51, 63);
+    display: flex;
+    visibility: visible;
+    margin-bottom: 0.25rem;
+    height: auto;
+    min-height: 1.5rem;
+    vertical-align: middle;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 288px;
+}
+.sidebar-language-selection{
+    line-height: 1.4;
+    font-size: 1rem;
+    font-weight: normal;
+    font-family: "Source Sans Pro", sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    height: 2.5rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.5rem;
+    border-color: rgb(255, 255, 255);
+    color: rgb(49, 51, 63);
+    border-style: solid;
+    border-width: 1px;
+    padding: 0.5rem;
+    cursor: text;
+    color-scheme: light;
+}
+
+.dark-theme .collapse-icon{
+    background-color: #1E1E1E;
+}
+.dark-theme .sidebar.open{
+    background-color: #1E1E1E;
+}
+
+.dark-theme .sidebar-header{
+    background-color: #1E1E1E;
+}
+
+.dark-theme .sidebar-content .label{
+    color: white;
+}
+
+/* Ensure select box dropdown options don't appear too large on mobile */
+@media (max-width: 768px) {
+    .sidebar-language-selection {
+      font-size: 14px;  /* Adjust the font size */
+      width: 80%;       /* Adjust the width to make it fit better */
+    }
+    
+    .sidebar-language-selection option {
+      font-size: 14px;  /* Adjust the font size for the options */
+    }
+}
+  
