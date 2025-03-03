@@ -23,6 +23,7 @@ import pandas as pd
 import requests
 
 from flask_cors import CORS
+import fickling
 
 load_dotenv()  # Load env variables from .env file
 
@@ -56,7 +57,7 @@ embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 # Load documents for FAISS vectors
 with open(config.DATA_FILE, "rb") as f:
-    docs = pickle.load(f)
+    docs = fickling.load(f)
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
 final_documents = text_splitter.split_documents(docs)
 
@@ -302,7 +303,7 @@ def upload_pdf():
         # Load and update data from the pickle file
         try:
             with open(config.DATA_FILE, 'rb') as f:
-                existing_data = pickle.load(f)
+                existing_data = fickling.load(f)
                 print("Log: Pickle data loaded successfully")
 
             updated_data = existing_data + pdf_data
