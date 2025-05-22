@@ -223,7 +223,7 @@ def detect_and_translate(user_input, user_language):
 
 def save_chat_history(history):
     try:
-        response = requests.post('http://127.0.0.1:5000/save_history', json={'history': history})
+        response = requests.post('http://127.0.0.1:5000/save_history', json={'history': history}, timeout=60)
         print(f"Save history response: {response.json()}")
     except Exception as e:
         print(f"Error saving history: {e}")
